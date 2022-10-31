@@ -1,31 +1,37 @@
-import random
+import random #Импортируем модуль рандома
+memory = input("Type Y if you want to log last password: ") #Спрашиваем у пользователя сохранять ли пароль
 
-while (1==1):
-    a = 1
-    numbers = input("Type count of numbers you want (or q to quit): ")
-    if (numbers == "q"):
-        quit()
-    nint = int(numbers)
-    letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
-    caplets = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
-    symbols = ["1","2","3","4","5","6","7","8","9","0","/","|","*","-","_","+","@"]
-    output = []
+while (1==1): #Всегда повторяем
+    a = 1 #Создаём переменную a и присваиваем ей значение 1
+    numbers = input("Type count of numbers you want (or q to quit): ") #создаём переменную numbers и записываем в неё введённую пользователем длину пароля
+    if (numbers == "q"): #Если пользователь ввёл q
+        quit() #Выходим
+        print("Good Luck!       Password Generator By Yaku!") #Выводим прощальное сообщение
+    nint = int(numbers) #Превращаем переменную numbers в числовую переменную
+    letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"] #Создаём массив с маленькими буквами английского алфавита
+    caplets = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"] #Создаём массив с большими буквами английского алфавита
+    symbols = ["1","2","3","4","5","6","7","8","9","0","/","|","*","-","_","+","@"] #Создаём массив с различными символами
+    output = [] #Создаём массив с выводом программы
 
-
-    while (a <= nint ):
-        random.seed()
-        array = random.randint(1, 3)
-        if (array == 1):
-            random.seed()
-            c = random.randint(0, 25)
-            output.append(letters[c])
-        if (array == 2):
-            random.seed()
-            c = random.randint(0, 25)
-            output.append(caplets[c])
-        if (array == 3):
-            random.seed()
-            c = random.randint(0, 16)
-            output.append(symbols[c])
-        a = a+1
-    print (''.join(output))
+    while (a <= nint ): #Выполняем циклично пока кол-во символов в пароле меньше чем заданное
+        random.seed() #Инициализируем рандомайзер
+        array = random.randint(1, 3) #Случайно выбираем массив из которого возьмём символ
+        if (array == 1): #Если выбран 1 массив (английские маленькие буковки)
+            random.seed() #Заново инициализируем рандомайзер
+            c = random.randint(0, 25) #Случайно выбираем букву из массива
+            output.append(letters[c]) #Вставляем эту букву в выходной массив
+        if (array == 2): #Если выбран 2 массив (английские большие буковки)
+            random.seed() #Заново инициализируем рандомайзер
+            c = random.randint(0, 25) #Случайно выбираем букву из массива
+            output.append(caplets[c]) #Вставляем букву в выходной массив
+        if (array == 3): #Если выбран 3 массив (символы)
+            random.seed() #Заново инициализируем рандомайзер
+            c = random.randint(0, 16) #Случайно выбираем символ из массива
+            output.append(symbols[c]) #Вставляем символ в выходной массив
+        a = a+1 #Говорим программе, что мы вставили один символ в выходной пароль
+    print (''.join(output)) #По завершению сообщаем пользователю его сгенерированный пароль
+    if (memory == "Y"): #Если пользователь выбрал сохранять пароль
+        my_file = open("password.txt", "w") #Открываем файл с паролем
+        my_file.write(''.join(output)) #Записываем в него последний результат программы
+        my_file.close() #Закрываем файл
+    #By Yaku!
